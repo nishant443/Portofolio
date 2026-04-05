@@ -234,9 +234,40 @@
     footer{flex-direction:column;gap:10px;text-align:center}
     .dv{margin:0 22px}
   }
+  html {
+  scroll-behavior: smooth;
+}
+.nl a {
+  text-decoration: none;
+  color: inherit;
+}
+#topBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,255,163,0.3);
+  background: rgba(0,255,163,0.08);
+  color: var(--accent);
+  font-size: 18px;
+  cursor: none;
+  z-index: 9999;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+#topBtn:hover {
+  background: var(--accent);
+  color: #000;
+  box-shadow: 0 0 15px rgba(0,255,163,0.4);
+  transform: translateY(-3px);
+}
 </style>
 </head>
-<body>
+<body id="top">
 
 <div id="pb" style="width:0%"></div>
 <div class="cursor" id="cur"></div>
@@ -244,7 +275,9 @@
 
 <!-- NAV -->
 <nav id="nav">
-  <div class="nl">NK</div>
+  <div class="nl">
+    <a href="#top">NK</a>
+  </div>
   <ul class="nm">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
@@ -577,7 +610,7 @@
   <div>© 2026 Nishant Kumar · Built with <span class="fh">♥</span> &amp; JetBrains Mono</div>
   <div>VIT Vellore · B.Tech ECE · Oct 2026</div>
 </footer>
-
+<button id="topBtn">↑</button>
 <script>
   // CURSOR
   const cur = document.getElementById('cur'), curR = document.getElementById('curR');
@@ -632,6 +665,21 @@
   // ACTIVE NAV
   const secs=document.querySelectorAll('section[id]'),navAs=document.querySelectorAll('.nm a');
   window.addEventListener('scroll',()=>{let cur='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-200)cur=s.id});navAs.forEach(a=>a.style.color=a.getAttribute('href')==='#'+cur?'var(--accent)':'');});
+
+  const topBtn = document.getElementById("topBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      topBtn.style.display = "block";
+    } else {
+      topBtn.style.display = "none";
+    }
+  });
+
+  topBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 </script>
+
 </body>
 </html>
